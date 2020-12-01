@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>9GAG Go Fun The World</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<style>
+			.change-vote{
+				color: coral;	
+			}
+
+			.pagination {
+  				position: fixed;
+  				bottom: 0;
+			}
+
+			button.upvote, button.downvote {
+  				background: #0087cc;
+  				color: #fff;
+  				cursor: pointer;
+  				font: inherit;
+				border: 1px solid #0087cc;
+  				transition: all .1s linear;
+			}
+			button.upvote:active, button.downvote:active {
+  				transform: translateY(3px);
+			}
+			
+
+			.darkmodebg{
+				background: #000;
+			}
+
+			.moon{
+				color: yellow;
+				border: 1px solid yellow;
+				border-radius: 50%;
+				background: yellow;			
+			}
+
+			h3 a{
+				color: #000;
+			}	
+
+		</style>
+	</head>
+	<body>
+		<button id="night"><i class="fa fa-moon-o"></i></button>
+		<% if(posts) {%>
+			<% posts.forEach(function(p) {%>
+				<div class="container">
+					<div class="col-md-6">
+						<div class="col-md-12 panel panel-default">
+							<div class="panel-heading">	
+								<h3><a href ="/meme/<%=p.id%>"><%= p.title %></a></h3>
+							</div>
+							<div class="panel-body">	
+								<% if(p.content.includes('.mp4')){ %>
+									<video controls>
+										<source src ="<%= p.content %>">		
+									</video>
+								<% } else{ %>  
+									<img src ="<%= p.content %>" class="img-responsive">
+								<% } %>
+							</div>
+							<div class="well well-sm">
+								<p><span><a href="/meme/<%=p.id%>"><%= p.upVoteCount %> points </a></span> . <span><a href="/meme/<%=p.id%>"><%= p.commentsCount %> comments</a></span></p> 
+							</div>
+						</div>
+						<div class="col-md-12 well well-sm">						
+							<div class="col-md-6">
+								<span><button class="upvote"><i class="fa fa-arrow-up"></i></button></span>
+								<span><button class="downvote"><i class="fa fa-arrow-down"></i></button></span>
+								<span><button><i class="fa fa-comment"></i></button></span>
+								<span><button><i class="fa fa-ellipsis-h"></i></button></span>
+							</div>	
+							<div class="col-md-offset-1 col-md-5">
+								<span><button><i class="fa fa-facebook-square"></i> Facebook</button></span>
+                                                        	<span><button><i class="fa fa-pinterest-square"></i> Pinterest</button></span>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<hr>			
+						</div>		
+					</div>						             
+				 </div>
+                        </ul>
+			<%}); %>
+			<ul class="pagination pagination-sm">
+                        	<li class=""><a href="/0">1</a></li>
+                                <li><a href="/1">2</a></li>
+                                <li><a href="/2">3</a></li>
+                                <li><a href="/3">4</a></li>
+                                <li><a href="/4">5</a></li>
+				<li><a href="/5">6</a></li>
+                                <li><a href="/6">7</a></li>
+                                <li><a href="/7">8</a></li>
+                                <li><a href="/8">9</a></li>
+                                <li><a href="/9">10</a></li>
+				<li><a href="/10">11</a></li>
+                                <li><a href="/11">12</a></li>
+                                <li><a href="/12">13</a></li>
+                                <li><a href="/13">14</a></li>
+                                <li><a href="/14">15</a></li>
+				<li><a href="/15">16</a></li>
+                                <li><a href="/16">17</a></li>
+                                <li><a href="/17">18</a></li>
+                                <li><a href="/18">19</a></li>
+                                <li><a href="/19">20</a></li>
+                        </ul>
+		<% } %>
+	</body>
+</html>
+<script>
+	$(document).ready(function(){
+  		$(".upvote").click(function(){
+    			$(".fa-arrow-up").toggleClass("change-vote");
+  		});
+
+		$(".downvote").click(function(){
+			$('.fa-arrow-down').toggleClass("change-vote");
+		});
+		
+		$("#night").click(function(){
+			$("body, .panel, .panel-heading").toggleClass("darkmodebg");
+			$("#night").toggleClass("moon");
+		});
+
+	});   
+</script>
+
+
+
+

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+        <head>
+        	<title>9GAG Go Fun The World</title>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<style>
+                        .change-vote{
+                                color: coral !important;
+                        }
+
+                        button.upvote, button.downvote {
+                                background: #0087cc;
+                                color: #fff;
+                                cursor: pointer;
+                                font: inherit;
+                                border: 1px solid #0087cc;
+                                transition: all .1s linear;
+                        }
+                        button.upvote:active, button.downvote:active {
+				color: coral ;
+                                transform: translateY(3px);
+                        }
+
+                </style>
+
+        </head>
+        <body>
+        	<div class= "container">
+			<div class="col-md-6">
+				<% if(post) { %>
+					<div class="col-md-12 panel panel-default">
+						<div class="col-md-12 well well-md">
+                					<h3 class=""><%= post.title %></h3>
+							<p><span><%= post.upVoteCount %></span> points .<span><%= post.commentsCount %> comments </span></p>
+						</div>
+						<div class="col-md-12 well well-md">
+							<span><button class="upvote"><a href="#"><i style="color: #fff;" class="fa fa-arrow-up"></i></a></button></span>
+							<span><button class="downvote"><a href="#"><i style="color: #fff;" class="fa fa-arrow-down"></i></a></button></span>
+							<span><button><a href="#"><i class="fa fa-facebook-square"></i> Facebook </a></button></span>
+							<span><button><a href="#"><i class="fa fa-pinterest-square"></i> Pinterest</a></button></span>
+							<span><button><a href="#"><i class="fa fa-ellipsis-h"></i></a></button></span>
+                                        	</div>
+						<div class="col-md-12">	
+							<% if(post.content.includes('.mp4')){ %>
+                        					<video controls autoplay>
+                                					<source src ="<%= post.content %>">
+                                				</video>
+                        				<% } else{ %>
+                               					<img src ="<%= post.content %>">
+                       	 				<% } %>
+						</div>
+					</div>
+					<div>
+						<hr>		
+					</div>	
+				<% }%>
+				<div class="col-md-12">
+					<hr>	
+				</div>	
+				<% if(post && post.comments) { %>
+					<% post.comments.forEach(function(p) {%>
+						<div class="col-md-12">
+							<p><span><b><%= p.user %></b></span> . <span><%= p.likes %> points</span></p>
+							<% if(p.content.includes('.jpg') || p.content.includes('.gif')){ %>
+                                				<img src ="<%= p.content %>" class="img-responsive">
+                        				<% } else if(p.content.includes('.mp4')){ %>
+								<video controls>
+									<source src ="<%= p.content %>">
+								</video>
+							<% } else {%>
+								<p><%= p.content %></p>
+							<% } %>
+						</div>
+					<% });%>
+				<% }%>
+			</div>
+		</div>	
+        </body>
+</html>
+<script>
+        $(document).ready(function(){
+                $(".upvote").click(function(){
+                        $(".fa-arrow-up").toggleClass("change-vote");
+                });
+
+                $(".downvote").click(function(){
+                        $('.fa-arrow-down').toggleClass("change-vote");
+                });
+        });   
+</script>
+
+
+
+
